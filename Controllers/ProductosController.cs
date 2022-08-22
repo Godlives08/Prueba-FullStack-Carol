@@ -81,7 +81,7 @@ namespace Prueba_FullStack_Carol.Controllers
             {
                 if (!ProductoExists(id))
                 {
-                    return NotFound();
+                    return Ok(false);
                 }
                 else
                 {
@@ -89,7 +89,7 @@ namespace Prueba_FullStack_Carol.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(true);
         }
 
         // POST: api/Productos
@@ -118,13 +118,13 @@ namespace Prueba_FullStack_Carol.Controllers
             var producto = await _context.Productos.FindAsync(id);
             if (producto == null)
             {
-                return NotFound();
+                return Ok(false);
             }
 
             _context.Productos.Remove(producto);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(true);
         }
 
         private bool ProductoExists(int id)
